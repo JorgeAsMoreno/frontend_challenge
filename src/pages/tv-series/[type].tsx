@@ -1,12 +1,12 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { GetServerSideProps } from 'next'
+import Card from '@/components/Card/Card'
+import Container from '@/components/Container/Container'
+import Modal from '@/components/Modal/Modal'
+import { insecureFetchFromAPI } from '@/requests/api'
 import { IResponse, IResponseData } from '@/types/Request'
 import { REQUESTS } from '@/utils/constants'
-import { insecureFetchFromAPI } from '@/requests/api'
-import Container from '@/components/Container/Container'
-import Card from '@/components/Card/Card'
+import { GetServerSideProps } from 'next'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
-import Modal from '@/components/Modal/Modal'
 
 const CardContainer = styled.div`
   display: flex;
@@ -16,37 +16,23 @@ const CardContainer = styled.div`
   padding: 1rem;
 `
 
-const Form = styled.form`
-  align-items: center;
-  display: flex;
-  margin: 2rem 1rem 2rem 1rem;
-`
-
-const Label = styled.label`
+const Title = styled.h3`
   font-weight: bold;
   font-size: 3rem;
-  margin-right: 1rem;
+  margin: 2rem 1rem;
+  text-transform: capitalize;
+  font-variant: small-caps;
 `
 
-const Input = styled.input`
-  background: transparent;
-  border: 1px solid #fff;
-  outline: 0;
-  padding: .75rem;
-  width: 250px;
-`
-
-interface ISearch {
-  allMediaTypes: IResponse
+interface IType {
+  initialData: IResponse
+  type: string
 }
 
-const Search = ({
-  allMediaTypes
-}: ISearch) => {
-  const [input, setInput] = useState<string>('')
+const Type = ({ initialData, type }: IType) => {
   const [openModal, setOpenModal] = useState<boolean>(false)
   const [selectedItemId, setSelectedItemId] = useState<number>(1)
-  const [data, setData] = useState<IResponseData[]>(allMediaTypes.results)
+  const [data, setData] = useState<IResponseData[]>(initialData.results)
   const [page, setPage] = useState<number>(1)
   const loaderRef = useRef<HTMLDivElement>(null)
 
@@ -58,10 +44,13 @@ const Search = ({
   const fetchMoreData = async () => {
     try {
       const nextPage = page + 1
-      const allMediaTypesList = await insecureFetchFromAPI(`${REQUESTS.popularMovieList}?page=${nextPage}`)
-      const newData = allMediaTypesList.data.results
+      const params = type
+      const getTypeList = await insecureFetchFromAPI(
+        `${REQUESTS.baseMovieSearch}${params}?page=${nextPage}`
+      );
+      const newData = getTypeList.data.results
       setData(prevData => [...prevData, ...newData])
-      setPage(nextPage)
+      setPage(nextPage);
     } catch (error) {
       console.error('Error fetching data:', error)
     }
@@ -88,59 +77,52 @@ const Search = ({
     };
   }, [loaderRef, fetchMoreData])
 
-  const list = useMemo(() => {
-    return data.filter((e: IResponseData) => {
-      if ((e.name || e.original_title).toString().toLocaleLowerCase().includes(input.toLocaleLowerCase())) {
-        return e.name || e.original_title
-      }
-    })
-  }, [input, data])
-
   return (
     <Container>
-      <Form onSubmit={(e) => e.preventDefault()}>
-        <Label>Busqueda</Label>
-        <Input
-          placeholder='Buscar...'
-          onChange={({ target }) => setInput(target.value)}
-          type='text'
-        />
-      </Form>
+      <Title>
+        {type}
+      </Title>
       <CardContainer>
         {
-          list.map(item => (
+          data.map(item => (
             <Card
               key={item.id}
-              alt={item.original_title || item.name}
-              imageUrl={item.backdrop_path}
-              title={item.original_title || item.name}
-              handleCardClick={handleCardClick}
               id={item.id}
+              imageUrl={item.backdrop_path}
+              handleCardClick={handleCardClick}
+              alt={item.name || item.original_title}
+              title={item.name || item.original_title}
             />
           ))
         }
       </CardContainer>
       <div ref={loaderRef} style={{ height: '20px', background: 'transparent' }} />
-      {openModal && (
+      {
+        openModal &&
         <Modal
           id={selectedItemId}
-          setOpenModal={setOpenModal}
+          {...{
+            setOpenModal,
+          }}
           requestUrl={REQUESTS.getMovieDetails}
         />
-      )}
+      }
     </Container>
   )
 }
 
-export default Search
+export default Type
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ({
+  query,
+}) => {  
   try {
-    const allMediaTypesList = await insecureFetchFromAPI(REQUESTS.popularMovieList)
-
+    const params = query.type
+    const getTypeList = await insecureFetchFromAPI(`${REQUESTS.baseTVSeriesSearch}${params}`)
     return {
       props: {
-        allMediaTypes: allMediaTypesList.data
+        initialData: getTypeList.data,
+        type: params
       }
     }
   } catch (error) {
