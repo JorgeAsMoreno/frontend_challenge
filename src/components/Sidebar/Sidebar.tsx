@@ -3,11 +3,13 @@ import { PiTelevisionSimpleBold } from "react-icons/pi";
 import { TbMovie, TbSearch } from "react-icons/tb";
 import { FaHouse } from "react-icons/fa6";
 import MenuItem from '../MenuItem/MenuItem'
-import { signIn } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import S from './sidebar.styles'
 import { GrLogin } from "react-icons/gr";
 
 const Sidebar = () => {
+  const {data:session} = useSession()
+
   return (
     <nav className='nav_sidebar'>
       <MenuItem
@@ -26,11 +28,14 @@ const Sidebar = () => {
         icon={<TbSearch />}
         path='/search'
       />
-      <S.Session>
-        <GrLogin
-          onClick={() => signIn()}
-        />
-      </S.Session>
+      {
+        session !== null &&
+        <S.Session>
+          <GrLogin
+            onClick={() => signOut()}
+          />
+        </S.Session>
+      }
     </nav>
   )
 }

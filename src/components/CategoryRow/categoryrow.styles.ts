@@ -22,6 +22,15 @@ const CategoryLink = styled(Link)`
     display: flex;
   }
 `
+const CategoryLinkMobile = styled(Link)`
+  cursor: pointer;
+  color: #fff;
+  display: flex;
+  font-size: 1.5rem;
+  @media screen and (min-width: 767px) {
+    display: none;
+  }
+`
 
 const CategoryMovies = styled.div`
   display: flex;
@@ -57,4 +66,5 @@ export default {
   CategoryInfo,
   CategoryLink,
   Teaser,
+  CategoryLinkMobile
 }

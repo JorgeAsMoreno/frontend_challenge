@@ -7,7 +7,7 @@ const StyledLink = styled(Link)<{
   path: string
 }>`
   color: ${(props) => useRouter().pathname ===  props.path ? '#40c1ad' : '#fff'};
-  font-size: 1rem;
+  font-size: 1.5rem;
   margin: 2.75rem 0;
 
   @media screen and (min-width: 768px) {

@@ -2,9 +2,8 @@ import React, { useState } from 'react'
 import S from './categoryrow.styles'
 import { IResponseData } from '@/types/Request'
 import Card from '../Card/Card'
-import { REQUESTS } from '@/utils/constants'
 import Modal from '../Modal/Modal'
-import { GetServerSideProps } from 'next'
+import { LuChevronRightCircle } from "react-icons/lu";
 
 interface ICategoryRow {
   title: string
@@ -28,6 +27,7 @@ const CategoryRow = ({title, data, requestUrl, type, pageName}: ICategoryRow) =>
       <S.CategoryInfo>
         <S.CategoryTitle>{title}</S.CategoryTitle>
         <S.CategoryLink href={`${pageName}/${type}`}>Mostrar mas</S.CategoryLink>
+        <S.CategoryLinkMobile href={`${pageName}/${type}`}><LuChevronRightCircle /></S.CategoryLinkMobile>
       </S.CategoryInfo>
       <S.CategoryMovies>
         {
