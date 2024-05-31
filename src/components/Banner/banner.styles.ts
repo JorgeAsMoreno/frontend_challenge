@@ -71,6 +71,12 @@ const MovieDescription = styled.div`
   }
 `
 
+const Session = styled.div`
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+`
+
 export default {
   Header,
   Contents,
@@ -78,4 +84,5 @@ export default {
   MovieStats,
   Stat,
   MovieDescription,
+  Session
 }

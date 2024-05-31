@@ -7,7 +7,8 @@ const nextConfig = {
   images: {
     domains: [
       'localhost',
-      'image.tmdb.org'
+      'image.tmdb.org',
+      'lh3.googleusercontent.com',
     ],
   },
 };
