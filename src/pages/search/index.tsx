@@ -20,12 +20,21 @@ const Form = styled.form`
   align-items: center;
   display: flex;
   margin: 2rem 1rem 2rem 1rem;
+  flex-direction: column;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+  }
 `
 
 const Label = styled.label`
   font-weight: bold;
-  font-size: 3rem;
+  font-size: 2rem;
   margin-right: 1rem;
+
+  @media screen and (min-width: 768px) {
+    font-size: 3rem;
+  }
 `
 
 const Input = styled.input`
@@ -33,7 +42,14 @@ const Input = styled.input`
   border: 1px solid #fff;
   outline: 0;
   padding: .75rem;
-  width: 250px;
+  width: -webkit-fill-available;
+  margin-top: 1rem;
+
+  @media screen and (min-width: 768px) {
+    width: 250px;
+    margin-top: 0;
+  }
+  
 `
 
 interface ISearch {

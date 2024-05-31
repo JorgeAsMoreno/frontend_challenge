@@ -28,14 +28,13 @@ const Profile = () => {
           }}
         />
       }
-      <S.Chevron>
-        {
-          session === null ?
-          <span>Login</span> :
-          <span>Sing out</span>
-        }
-        <FaChevronRight/>
-      </S.Chevron>
+      {
+        session === null &&
+        <S.Chevron>
+          <span>{session === null ? 'Login' : 'Sing out'}</span>
+          <FaChevronRight/>
+        </S.Chevron>
+      }
     </S.Profile>
   )
 }
