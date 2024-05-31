@@ -3,7 +3,9 @@ import React, { useEffect, useState } from 'react'
 import S from './banner.styles'
 import { insecureFetchFromAPI } from '@/requests/api'
 import { REQUESTS } from '@/utils/constants'
+import { useSession } from 'next-auth/react'
 import RatingReview from '../RaitingReview/RaitingReview'
+import Profile from '../Profile/Profile'
 
 interface IBanner {
   randomItem: IResponseData
@@ -14,6 +16,7 @@ const Banner = ({ randomItem }:IBanner) => {
     id: 0,
     total_results: 0
   })
+  const { data: session } = useSession()
 
   useEffect(() => {
     insecureFetchFromAPI(REQUESTS.getMovieReviews(randomItem?.id)).then(({data}) => {
@@ -25,6 +28,9 @@ const Banner = ({ randomItem }:IBanner) => {
 
   return (
     <S.Header backdroppath={randomItem?.backdrop_path}>
+      <S.Session>
+        <Profile />
+      </S.Session>
       <S.Contents>
         <S.MovieTitle>
           {randomItem?.title || randomItem?.original_title || randomItem?.name}
