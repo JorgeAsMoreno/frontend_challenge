@@ -9,8 +9,8 @@ const authOptions: NextAuthOptions = {
   },
   providers: [
     GoogleProvider({
-      clientId: '138828050871-vpnp5m9bp41hi080k60tlr65sadep8tp.apps.googleusercontent.com',
-      clientSecret: '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'
+      clientId: process.env.NEXT_GOOGLE_ID as string,
+      clientSecret: process.env.NEXT_GOOGLE_SECRET as string,
     }),
   ]
 }
