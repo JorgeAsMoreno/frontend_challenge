@@ -7,10 +7,6 @@ Welcome to FinSphera Frontend Technical Assessment. This is a challenge to evalu
 Example:
 ![alt text](image.png)
 
-2. A GitHub clone page that shows a list of repositories and their details. Consume from the GitHub API.
-Example:
-![alt text](image-1.png)
-
 The project should be built using React or Next.js and will have to follow the following aspects:
 1. Fork this repository.
 2. Built from scratch: You have the opportunity to create the repository from scratch or using a template, but the code should be yours. As a personal recommendation, I suggest using Vite.
@@ -20,18 +16,37 @@ The project should be built using React or Next.js and will have to follow the f
 
 > The assestment will have a limited time to be completed. I suggest to organize to complete the aspects to be evaluated over seek the perfect project. You can document the points that you would have added if you had more time.
 
-### Aspects to be evaluated
-* The correct handling of git workflow, good organization of the commits and the branches.
-* The quality of the code, following the best practices and the patterns of the language.
-* The quality of the user interface, the user experience and the responsiveness of the application it's a crucial aspect.
-* Documentation of the project. You have the opportunity to show here how organized you are. Don't miss the opportunity 😉.
-* How you handle the API requests and the data that you get from them.
-* The management of the data and the state of the application. You can use the tool that feels more comfortable, whatever it is Context API, Redux, Recoil, etc. But show understanding of their concepts.
-* A small demonstration of testing. It's not necessary to test all the components, but at least show how you would test a component or a hook.
-* If you feel short of time, please document the steps that you would have taken to complete the project or what you would have added.
-* Creativity. You have the freedom to add any feature, pattern, library, or technique that you feel shows your skills as a developer.
-* Extra points if you implement a simple auth formulary, doesn't matter if it's with dummy data, but implement good practices of forms validation.
-* Typescript is a must.
+## Stack
+- React JS
+- StyledComponents
+- TypeScript
+- Next
+- Axios
+- React-icons
 
-## Part 2. Architecture
-* As the second part, you have to write in a markdown file into the root of the project, how you will handle a hypothetical situation where you have to scale the application to a bigger one. For example. How you will handle the state, components, routing system or even how it will be integrated with the backend or cloud services.
+## Pre requirements
+You need to have node js installed.
+
+## Scripts and commands
+
+- Clone the project: https://github.com/JorgeAsMoreno/frontend_challenge.git
+- Install dependencies: npm install
+- Run project: npm run dev
+
+## Deployment
+- https://frontend-challenge-gold.vercel.app/
+
+## Features and plus!
+- Change banner image when refresh the page
+- Show categories
+- Navigate by pages and categories (movies, tv-series)
+- Search movies
+- Modal information with trailer and info about the movie or serie
+- Mobile version
+- Login with google using NextAuth
+
+## Scalability
+- Using dynamic routes to show more info in the future with zones, times or buy a ticket
+- NexthAuth to add more providers to login
+- Inifinity scroll in the categories page
+- Loaders
