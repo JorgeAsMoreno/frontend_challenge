@@ -1,11 +1,10 @@
-import { IResponseData, IReviews } from '@/types/Request'
 import React, { useEffect, useState } from 'react'
-import S from './banner.styles'
+import { IResponseData, IReviews } from '@/types/Request'
 import { insecureFetchFromAPI } from '@/requests/api'
 import { REQUESTS } from '@/utils/constants'
-import { useSession } from 'next-auth/react'
 import RatingReview from '../RaitingReview/RaitingReview'
 import Profile from '../Profile/Profile'
+import S from './banner.styles'
 
 interface IBanner {
   randomItem: IResponseData
@@ -16,7 +15,6 @@ const Banner = ({ randomItem }:IBanner) => {
     id: 0,
     total_results: 0
   })
-  const { data: session } = useSession()
 
   useEffect(() => {
     insecureFetchFromAPI(REQUESTS.getMovieReviews(randomItem?.id)).then(({data}) => {

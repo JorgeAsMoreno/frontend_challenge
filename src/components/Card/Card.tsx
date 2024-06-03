@@ -1,4 +1,3 @@
-import { IResponseData } from '@/types/Request'
 import { BASEURL } from '../../utils/constants'
 import S from './card.styles'
 

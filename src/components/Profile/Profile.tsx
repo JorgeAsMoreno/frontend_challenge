@@ -1,5 +1,5 @@
+import React from 'react'
 import { signIn, useSession } from 'next-auth/react'
-import React, { useState } from 'react'
 import { RxAvatar } from "react-icons/rx";
 import { FaChevronRight } from "react-icons/fa";
 import S from './profile.styles'

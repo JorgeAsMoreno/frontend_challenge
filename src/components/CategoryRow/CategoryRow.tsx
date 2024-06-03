@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import S from './categoryrow.styles'
 import { IResponseData } from '@/types/Request'
+import { LuChevronRightCircle } from "react-icons/lu";
 import Card from '../Card/Card'
 import Modal from '../Modal/Modal'
-import { LuChevronRightCircle } from "react-icons/lu";
+import S from './categoryrow.styles'
 
 interface ICategoryRow {
   title: string

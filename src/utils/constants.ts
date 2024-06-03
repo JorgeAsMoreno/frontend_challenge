@@ -4,7 +4,7 @@ export const OPTIONS = {
   method: 'GET',
   headers: {
     accept: 'application/json',
-    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyMjk0MzIzZTIzYzc2M2E4MjQ3ZmUyMzg2N2YwMGI2MiIsInN1YiI6IjVmNzY0N2E0MTU2Y2M3MDAzNzRhYWRlMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ErHfMmfpFWqZc6-TnngSiY66oup85TJP3Df-YtCEXT8'
+    Authorization: process.env.NEXT_PUBLIC_API_KEY
   },
 }
 
